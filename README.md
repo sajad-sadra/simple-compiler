@@ -1,5 +1,5 @@
 # Simple Compiler
-Simple compiler use flex and bison just for university project
+Simple compiler use *flex* and *bison* just for university project
 
 ## Install tools
 on debian base linux run this command
