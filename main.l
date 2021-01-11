@@ -38,8 +38,9 @@
 "input"     {return K_INPUT};
 
 
-[0-9]+\.[0-9]+ 	{yylval.fval = atof(yytext); return T_FLOAT;}
-[0-9]+		{yylval.ival = atoi(yytext); return T_INT;}
+[0-9]+(\.[0-9]+)?(E(\+|-)?[0-9]+)? 	{yylval.fval = atof(yytext); return T_NUM;}
+"\".*\""    {return T_STRING}
+[a-zA-Z]([a-zA-Z]|[0-9]|_)*     {return T_VAR}
 \n		{return T_NEWLINE;}
 "+"		{return T_PLUS;}
 "-"		{return T_MINUS;}
