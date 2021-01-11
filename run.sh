@@ -1,6 +1,10 @@
-rm lex.yy.c
-rm a.out
+rm zpp > /dev/null
+rm main.tab.c > /dev/null
+rm main.tab.h > /dev/null
+rm lex.yy.c > /dev/null
 
-lex main.l
-gcc lex.yy.c
-./a.out
+
+bison -d main.y
+flex main.l
+gcc main.tab.c lex.yy.c -o zpp
+./zpp
