@@ -2,3 +2,4 @@ zpp
 main.tab.c
 main.tab.h
 lex.yy.c
+.main.l.swp
