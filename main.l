@@ -13,7 +13,6 @@
 
 [ \t]	; // ignore all whitespace
 
-"bool"     {return K_BOOL};
 "break"     {return K_BREAK};
 "case"     {return K_CASE};
 "char"     {return K_CHAR};
@@ -39,16 +38,12 @@
 
 
 [0-9]+(\.[0-9]+)?(E(\+|-)?[0-9]+)? 	{yylval.fval = atof(yytext); return T_NUM;}
-"\".*\""    {return T_STRING}
+"true"  {return T_TRUE}
+"false"  {return T_FALSE}
+["]([^"]|\\(.|\n))*["]    {return T_STRING}
 [a-zA-Z]([a-zA-Z]|[0-9]|_)*     {return T_VAR}
 \n		{return T_NEWLINE;}
-"+"		{return T_PLUS;}
-"-"		{return T_MINUS;}
-"*"		{return T_MULTIPLY;}
-"/"		{return T_DIVIDE;}
-"("		{return T_LEFT;}
-")"		{return T_RIGHT;}
-"exit"		{return T_QUIT;}
-"quit"		{return T_QUIT;}
+
+
 
 %%
