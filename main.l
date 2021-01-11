@@ -35,7 +35,7 @@
 "input"     {return K_INPUT;}
 
 
-[0-9]+(\.[0-9]+)?(E(\+|-)?[0-9]+)? 	{yylval.fval = atof(yytext); return NUM;}
+[0-9]+(\.[0-9]+)?(E(\+|-)?[0-9]+)? 	{return NUM;}
 "true"  {return TRUE;}
 "false"  {return FALSE;}
 ["]([^"]|\\(.|\n))*["]    {return STRING;}
