@@ -11,8 +11,6 @@
 
 %%
 
-[ \t]	; // ignore all whitespace
-
 "break"     {return K_BREAK;}
 "case"     {return K_CASE;}
 "char"     {return K_CHAR;}
@@ -47,6 +45,32 @@
 "/\#.*\n.*\#\/"    {return COMMENT;}
 
 
-
+"++"	{return PADD;}
+"+"	{return ADD;}
+"--"	{return PADD;}
+"-"	{return ADD;}
+"*"	{return MUL;}
+"/"	{return MUL;}
+"<>"	{return REL;}
+"=="	{return REL;}
+">="	{return REL;}
+"<="	{return REL;}
+">"	{return REL;}
+"<"	{return REL;}
+"&&"	{return LOG;}
+"||"	{return LOG;}
+"&"	{return LOG;}
+"|"	{return LOG;}
+"!"	{return LOG;}
+"("	{return OPEN_P;}
+")"	{return CLOSE_P;}
+"{"	{return OPEN_B;}
+"}"	{return CLOSE_B;}
+";"	{return SEMI;}
+","	{return COM;}
+"="	{return EQU;}
+\t	{return NEW;}
+\n	{return NEW;}
+[ ]	{return NEW;}
 
 %%
