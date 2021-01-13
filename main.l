@@ -19,7 +19,6 @@
 "default"     {return K_DEFAULT;}
 "double"     {return K_DOUBLE;}
 "else"     {return K_ELSE;}
-"false"     {return K_FALSE;}
 "function"     {return K_FUNCTION;}
 "float"     {return K_FLOAT;}
 "output"     {return K_OUTPUT;}
@@ -28,7 +27,6 @@
 "static"     {return K_STATIC;}
 "string"     {return K_STRING;}
 "switch"     {return K_SWITCH;}
-"true"     {return K_TRUE;}
 "type"     {return K_TYPE;}
 "for"     {return K_FOR;}
 "if"     {return K_IF;}
