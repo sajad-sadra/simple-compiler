@@ -46,7 +46,7 @@
 "++"	{return PADD;}
 "+"	{return ADD;}
 "--"	{return PADD;}
-"-"	{return ADD;}
+"-"	{return MIN;}
 "*"	{return MUL;}
 "/"	{return MUL;}
 "<>"	{return REL;}
@@ -57,18 +57,22 @@
 "<"	{return REL;}
 "&&"	{return LOG;}
 "||"	{return LOG;}
+"%"	{return MOD;}
 "&"	{return LOG;}
 "|"	{return LOG;}
-"!"	{return LOG;}
+"!"	{return LOG_T;}
 "("	{return OPEN_P;}
 ")"	{return CLOSE_P;}
 "{"	{return OPEN_B;}
 "}"	{return CLOSE_B;}
+"[" {return OPEN_C;}
+"]" {return CLOSE_C;}
 ";"	{return SEMI;}
+":" {return COL;}
 ","	{return COM;}
 "="	{return EQU;}
 \t	{return NEW;}
 \n	{return NEW;}
-[ ]	{return NEW;}
+[ ]	{return W;}
 
 %%
