@@ -39,7 +39,7 @@
 "false"  {return FALSE;}
 ["]([^"]|\\(.|\n))*["]    {return STRING;}
 [a-zA-Z]([a-zA-Z]|[0-9]|_)*     {return VAR;}
-\n		{return NEWLINE;}
+\n
 "\#\#.*"    {return COMMENT;}
 "/\#.*\n.*\#\/"    {return COMMENT;}
 
@@ -72,8 +72,7 @@
 ":" {return COL;}
 ","	{return COM;}
 "="	{return EQU;}
-\t	{return NEW;}
-\n	{return NEW;}
-[ ]	{return NEW;}
+\t	
+[ ]	
 
 %%

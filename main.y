@@ -13,7 +13,7 @@ void yyerror(const char* s);
 %union {
 }
 
-%token K_BREAK K_CASE K_CHAR K_CONST K_CONTINUE K_DEFAULT K_DOUBLE K_ELSE  K_FUNCTION MOD K_BOOL
+%token K_BREAK K_CASE K_CHAR K_CONST K_CONTINUE K_DEFAULT K_DOUBLE K_ELSE  K_FUNCTION MOD K_BOOL NEWLINE SPACE
 %token  K_FLOAT K_OUTPUT K_INT K_RETURN K_STATIC K_STRING K_SWITCH  K_TYPE K_FOR K_IF COL SEMI OPEN_C CLOSE_C MIN LOG_T
 %token K_INPUT NUM TRUE FALSE STRING VAR NEWLINE COMMENT PADD ADD MUL REL LOG OPEN_P CLOSE_P OPEN_B CLOSE_B COM EQU NEW
 
@@ -21,17 +21,17 @@ void yyerror(const char* s);
 
 
 program: func_def
-       | /*epsilon*/
+       | 
 	   ;
 
-func_def: 	func_def K_FUNCTION VAR COL inout block
-		|    K_FUNCTION VAR COL inout block
+func_def:  	func_def K_FUNCTION VAR COL inout block 
+		|   K_FUNCTION VAR COL inout block 
 		;
 
-inout:	input_list output_list
+inout:  input_list output_list
 	 |	input_list
-	 |	output_list
-	 |  /*epsilon*/
+	 |	output_list  
+	 |
 	 ;
 
 input_list:		K_INPUT params;
@@ -42,8 +42,8 @@ params:		type VAR COM params
 		|	type VAR
 		;
 
-block:	OPEN_B new_block CLOSE_B
-     | 	OPEN_B	CLOSE_B
+block:	OPEN_B CLOSE_B
+     | 	OPEN_B	new_block CLOSE_B
 	 ;
       
 new_block: new_block var_dcl
@@ -107,7 +107,7 @@ variable:	VAR num_const
 
 num_const:	num_const OPEN_C num_const CLOSE_C
 			|	OPEN_C num_const CLOSE_C
-			| /*epsilon*/
+			| 
 			;
 
 func_call:	VAR OPEN_P parameters CLOSE_P
@@ -158,7 +158,7 @@ arithmatic:	ADD
 		|	LOG
 		;
 
-conditional:	REL;
+conditional: REL;
 
 const_val:	num_const
 		|	bool_const
@@ -178,11 +178,7 @@ string_const: STRING {
 %%
 
 int main() {
-	yyin = stdin;
-	do {
-		yyparse();
-	} while(!feof(yyin));
-
+	yyparse();
 	return 0;
 }
 
