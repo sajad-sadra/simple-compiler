@@ -26,6 +26,7 @@
 "return"     {return K_RETURN;}
 "static"     {return K_STATIC;}
 "string"     {return K_STRING;}
+"bool"      {return K_BOOL;}
 "switch"     {return K_SWITCH;}
 "type"     {return K_TYPE;}
 "for"     {return K_FOR;}
@@ -73,6 +74,6 @@
 "="	{return EQU;}
 \t	{return NEW;}
 \n	{return NEW;}
-[ ]	{return W;}
+[ ]	{return NEW;}
 
 %%

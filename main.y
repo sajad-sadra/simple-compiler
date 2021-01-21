@@ -13,7 +13,7 @@ void yyerror(const char* s);
 %union {
 }
 
-%token K_BREAK K_CASE K_CHAR K_CONST K_CONTINUE K_DEFAULT K_DOUBLE K_ELSE  K_FUNCTION MOD
+%token K_BREAK K_CASE K_CHAR K_CONST K_CONTINUE K_DEFAULT K_DOUBLE K_ELSE  K_FUNCTION MOD K_BOOL
 %token  K_FLOAT K_OUTPUT K_INT K_RETURN K_STATIC K_STRING K_SWITCH  K_TYPE K_FOR K_IF COL SEMI OPEN_C CLOSE_C MIN LOG_T
 %token K_INPUT NUM TRUE FALSE STRING VAR NEWLINE COMMENT PADD ADD MUL REL LOG OPEN_P CLOSE_P OPEN_B CLOSE_B COM EQU NEW
 
@@ -62,6 +62,16 @@ new_var_dcl_cnt: new_var_dcl_cnt COM var_dcl_cnt
                 | COM var_dcl_cnt
   	            ;
 
+type:	K_INT
+	|	K_FLOAT
+	|	K_BOOL
+	|	K_CHAR
+	|	K_DOUBLE
+	|	VAR
+	|	K_STRING
+	| type OPEN_C CLOSE_C
+	;
+
 var_dcl_cnt: 	variable EQU expr
 			|	variable 
             ;
@@ -89,13 +99,13 @@ new_variable_2:	new_variable_2 COM variable
 			|	COM variable
 			;
 
-variable:	VAR num_const_2
+variable:	VAR num_const
 		|	VAR
 		|	PADD variable
 		|	variable PADD
 		;
 
-num_const_2:	num_const_2 OPEN_C num_const CLOSE_C
+num_const:	num_const OPEN_C num_const CLOSE_C
 			|	OPEN_C num_const CLOSE_C
 			| /*epsilon*/
 			;
@@ -155,6 +165,15 @@ const_val:	num_const
 		|	string_const
 		;
 
+bool_const: TRUE {
+			printf("bison find a true const \n");
+		}
+	| FALSE
+	;
+
+string_const: STRING {
+	printf("bison find a string: \n"); 
+}
 
 %%
 
