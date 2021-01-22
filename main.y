@@ -20,7 +20,7 @@ void yyerror(const char* s);
 %%
 
 
-program: func_def
+program: func_def {printf("OK\n");}
        | 
 	   ;
 
