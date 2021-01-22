@@ -1,3 +1,11 @@
-function main : {
-    const int ali;
+function main: {
+   int a;
+   char ch;
+   string st = "jahanipur";
+   ch, c = process_data(a, b, st);
 }
+
+function process_data: input int first, int second, string name output char letter, int number{
+  if (second > 0) {}
+}
+

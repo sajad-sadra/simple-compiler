@@ -165,15 +165,11 @@ const_val:	num_const
 		|	string_const
 		;
 
-bool_const: TRUE {
-			printf("bison find a true const \n");
-		}
+bool_const: TRUE
 	| FALSE
 	;
 
-string_const: STRING {
-	printf("bison find a string: \n"); 
-}
+string_const: STRING 
 
 %%
 
@@ -183,6 +179,6 @@ int main() {
 }
 
 void yyerror(const char* s) {
-	fprintf(stderr, "Parse error: %s\n", s);
+	fprintf(stderr, "Error\n");
 	exit(1);
 }
