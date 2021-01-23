@@ -40,8 +40,8 @@
 ["]([^"]|\\(.|\n))*["]    {return STRING;}
 [a-zA-Z]([a-zA-Z]|[0-9]|_)*     {return VAR;}
 \n
-"\#\#.*"    {return COMMENT;}
-"/\#.*\n.*\#\/"    {return COMMENT;}
+\#\#.* 
+\/\#((.|\n)*)\#\/  
 
 
 "++" {return PADD;}
