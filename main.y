@@ -78,8 +78,8 @@ var_dcl_cnt: 	variable EQU expr
 
 statement:	assignment SEMI
 		|	func_call SEMI
-		|   cond_stmt SEMI
-		|	loop_stmt SEMI
+		|   cond_stmt  
+		|	loop_stmt 
 		|	K_RETURN SEMI
 		|	expr SEMI
 		|	SEMI
@@ -118,20 +118,20 @@ parameters:	variable
 		|	variable COM parameters
 		;
 
-cond_stmt:	K_SWITCH OPEN_P VAR CLOSE_P COL OPEN_B cond_stmt_2 K_DEFAULT COL block CLOSE_B
+cond_stmt:	K_IF OPEN_P expr CLOSE_P block K_ELSE block
 		|	K_IF OPEN_P expr CLOSE_P block 
-		|	K_IF OPEN_P expr CLOSE_P block K_ELSE block
 		|	K_SWITCH OPEN_P VAR CLOSE_P COL OPEN_B K_DEFAULT COL block CLOSE_B
+		|	K_SWITCH OPEN_P VAR CLOSE_P COL OPEN_B cond_stmt_2 K_DEFAULT COL block CLOSE_B
 		;
 
 cond_stmt_2:	cond_stmt_2 K_CASE num_const COL block
 			|	K_CASE num_const COL block
 			;
 
-loop_stmt: 	K_FOR OPEN_B var_dcl SEMI expr SEMI loop_stmt_2 CLOSE_B block
-		|	K_FOR OPEN_B SEMI expr SEMI loop_stmt_2 CLOSE_B block
-		|	K_FOR OPEN_B var_dcl SEMI expr SEMI CLOSE_B block
-		|	K_FOR OPEN_B SEMI expr SEMI CLOSE_B block
+loop_stmt: 	K_FOR OPEN_P var_dcl expr SEMI loop_stmt_2 CLOSE_P block
+		|	K_FOR OPEN_P SEMI expr SEMI loop_stmt_2 CLOSE_P block
+		|	K_FOR OPEN_P var_dcl expr SEMI CLOSE_P block
+		|	K_FOR OPEN_P SEMI expr SEMI CLOSE_P block
 		;
 
 loop_stmt_2:	assignment
