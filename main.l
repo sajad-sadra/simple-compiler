@@ -44,23 +44,23 @@
 "/\#.*\n.*\#\/"    {return COMMENT;}
 
 
-"++"	{return PADD;}
+"++" {return PADD;}
 "+"	{return ADD;}
-"--"	{return PADD;}
+"--" {return PMIN;}
 "-"	{return MIN;}
 "*"	{return MUL;}
-"/"	{return MUL;}
-"<>"	{return REL;}
-"=="	{return REL;}
-">="	{return REL;}
-"<="	{return REL;}
-">"	{return REL;}
-"<"	{return REL;}
-"&&"	{return LOG;}
-"||"	{return LOG;}
+"/"	{return DIV;}
+"<>" {return REL_NEQ;}
+"==" {return REL_EQ;}
+">=" {return REL_GEQ;}
+"<=" {return REL_LEQ;}
+">"	{return REL_G;}
+"<"	{return REL_L;}
+"&&" {return LOG_AND;}
+"||" {return LOG_OR;}
 "%"	{return MOD;}
-"&"	{return LOG;}
-"|"	{return LOG;}
+"&"	{return LOG_BAND;}
+"|"	{return LOG_BOR;}
 "!"	{return LOG_T;}
 "("	{return OPEN_P;}
 ")"	{return CLOSE_P;}

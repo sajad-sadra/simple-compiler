@@ -13,14 +13,14 @@ void yyerror(const char* s);
 %union {
 }
 
-%token K_BREAK K_CASE K_CHAR K_CONST K_CONTINUE K_DEFAULT K_DOUBLE K_ELSE  K_FUNCTION MOD K_BOOL NEWLINE SPACE
+%token K_BREAK K_CASE K_CHAR K_CONST K_CONTINUE K_DEFAULT K_DOUBLE K_ELSE  K_FUNCTION MOD K_BOOL SPACE DIV PMIN LOG_AND LOG_OR
 %token  K_FLOAT K_OUTPUT K_INT K_RETURN K_STATIC K_STRING K_SWITCH  K_TYPE K_FOR K_IF COL SEMI OPEN_C CLOSE_C MIN LOG_T
-%token K_INPUT NUM TRUE FALSE STRING VAR NEWLINE COMMENT PADD ADD MUL REL LOG OPEN_P CLOSE_P OPEN_B CLOSE_B COM EQU NEW
+%token K_INPUT NUM TRUE FALSE STRING VAR COMMENT PADD ADD MUL REL_NEQ REL_EQ REL_GEQ REL_LEQ REL_G REL_L LOG_BAND LOG_BOR OPEN_P CLOSE_P OPEN_B CLOSE_B COM EQU NEW
 
 %%
 
 
-program: func_def {printf("OK\n");}
+program: func_def 
        | 
 	   ;
 
@@ -47,7 +47,7 @@ block:	OPEN_B CLOSE_B
 	 ;
       
 new_block: new_block var_dcl
-         | new_block statement
+         | new_block statement 
          | statement
          | var_dcl
          ;
@@ -69,7 +69,7 @@ type:	K_INT
 	|	K_DOUBLE
 	|	VAR
 	|	K_STRING
-	| type OPEN_C CLOSE_C
+	| 	type OPEN_C CLOSE_C
 	;
 
 var_dcl_cnt: 	variable EQU expr
@@ -78,7 +78,7 @@ var_dcl_cnt: 	variable EQU expr
 
 statement:	assignment SEMI
 		|	func_call SEMI
-		|	cond_stmt SEMI
+		|   cond_stmt SEMI
 		|	loop_stmt SEMI
 		|	K_RETURN SEMI
 		|	expr SEMI
@@ -99,13 +99,13 @@ new_variable_2:	new_variable_2 COM variable
 			|	COM variable
 			;
 
-variable:	VAR num_const
+variable:	VAR num_const2
 		|	VAR
 		|	PADD variable
 		|	variable PADD
 		;
 
-num_const:	num_const OPEN_C num_const CLOSE_C
+num_const2:	num_const2 OPEN_C num_const CLOSE_C
 			|	OPEN_C num_const CLOSE_C
 			| 
 			;
@@ -118,9 +118,9 @@ parameters:	variable
 		|	variable COM parameters
 		;
 
-cond_stmt:	K_IF OPEN_P expr CLOSE_P block K_ELSE block
-		|	K_IF OPEN_P expr CLOSE_P
-		|	K_SWITCH OPEN_P VAR CLOSE_P COL OPEN_B cond_stmt_2 K_DEFAULT COL block CLOSE_B
+cond_stmt:	K_SWITCH OPEN_P VAR CLOSE_P COL OPEN_B cond_stmt_2 K_DEFAULT COL block CLOSE_B
+		|	K_IF OPEN_P expr CLOSE_P block 
+		|	K_IF OPEN_P expr CLOSE_P block K_ELSE block
 		|	K_SWITCH OPEN_P VAR CLOSE_P COL OPEN_B K_DEFAULT COL block CLOSE_B
 		;
 
@@ -138,13 +138,13 @@ loop_stmt_2:	assignment
 			|	expr
 			;
 
-expr:	expr binary_op expr
-	|	OPEN_B expr CLOSE_B
-	|	func_call
+expr:	expr binary_op expr 
+	|	CLOSE_P expr CLOSE_P 
+	|	func_call 
 	|	variable
 	|	const_val
-	|	MIN expr
-	|	LOG_T expr
+	|	MIN expr 
+	|	LOG_T expr 
 	;
 
 binary_op:	arithmatic
@@ -154,12 +154,26 @@ binary_op:	arithmatic
 arithmatic:	ADD
 		|	MIN
 		|	MUL
+		|	DIV
 		|	MOD
-		|	LOG
+		|	log_op
+		;
+		
+log_op:		LOG_BAND 
+		|	LOG_BOR
+		|	LOG_AND	
+		|	LOG_OR
 		;
 
-conditional: REL;
 
+conditional:	REL_NEQ
+			|	REL_EQ
+			|	REL_GEQ
+			|	REL_LEQ
+			|	REL_G
+			|	REL_L
+			;
+			
 const_val:	num_const
 		|	bool_const
 		|	string_const
@@ -169,7 +183,9 @@ bool_const: TRUE
 	| FALSE
 	;
 
-string_const: STRING 
+string_const: STRING ;
+
+num_const: NUM ;
 
 %%
 
