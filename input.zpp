@@ -1,24 +1,27 @@
 function main: {
    int a;
    char ch;
-   string st = "jahanipur";
-   ch, c = process_data(a, b, st);
+   string st1 = "Mohammad Nasr Isfahani";
+   string st2 = "Sajjad Sadraiyeh";
+   float Number1 = 102;
+   ch, c = process_my_data(Number1, st1, st2);
 }
 
-function process_data: input int first, int second, string name output char letter, int number{
-  int a = 1;
+function process_my_data: input int first, int second, string name output char letter, int number{
+  int number_one = 1;
   int b = 2;
-  float c = a + b;
+  float c = a + b , second;
+  double first;
   string akbar = "asghar";
   if(akbar < 0) {}
-  if(second == 0){
+  if(flag == 0){
    first = 7;
   }
   else{
-    first = 13 + second; 
+    first = 13 + b; 
   }
   for(int i=0; i < first ; i++){
-      second = second + i ;
+      number_one = number_one + i ;
   }
   switch (first): {
       case 7: {
@@ -31,7 +34,7 @@ function process_data: input int first, int second, string name output char lett
          number = first + 2 * second;
       }
    }
-   letter = name [7];
+   string letter = name [7];
    return;
 
   ## daf;mfda;ldmafadf3
